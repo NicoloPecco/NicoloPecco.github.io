@@ -14,12 +14,28 @@
     :root {
       --theme-blue: #007bff;
       --theme-blue-light: #e5f2ff;
+      --bg: #ffffff;
       --text-color: #4a4a4a;
+      --card-border: #e3e8ef;
+      --card-shadow: rgba(0,0,0,0.06);
+      --muted: #6b7280;
     }
 
     body {
       font-family: 'Noto Sans', sans-serif;
       color: var(--text-color);
+      background: var(--bg);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    body.dark-mode {
+      --bg: #0f172a;
+      --text-color: #e2e8f0;
+      --theme-blue: #6ba6ff;
+      --theme-blue-light: #1e293b;
+      --card-border: #1f2937;
+      --card-shadow: rgba(0,0,0,0.4);
+      --muted: #94a3b8;
     }
 
     a {
@@ -57,6 +73,9 @@
       padding: 25px;
       border-radius: 8px;
     }
+    body.dark-mode .box-highlight {
+      background-color: #111827;
+    }
 
     /* Publication cards */
     #publications .pub-card {
@@ -65,8 +84,8 @@
       border-radius: 10px;
       padding: 18px 18px 14px 18px;
       background: linear-gradient(145deg, #ffffff 0%, #f4f7fb 100%);
-      border: 1px solid #e3e8ef;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 20px var(--card-shadow);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     #publications .pub-card:hover {
@@ -75,16 +94,32 @@
     }
     #publications .pub-meta {
       font-size: 0.9rem;
-      color: #6b7280;
+      color: var(--muted);
     }
     #publications .pub-title {
       font-weight: 700;
       color: #1f2933;
     }
+    body.dark-mode #publications .pub-card {
+      background: linear-gradient(145deg, #111827 0%, #0b1220 100%);
+    }
+    body.dark-mode #publications .pub-title {
+      color: #e5e7eb;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- ================= TOP BAR ================= -->
+<div style="position:fixed; top:14px; right:14px; z-index:20;" class="buttons">
+  <button id="themeToggle" class="button is-theme is-rounded" aria-label="Toggle dark mode">
+    <span class="icon"><i class="fas fa-moon"></i></span>
+  </button>
+  <a href="mailto:nicolo.pecco@hsr.it" class="button is-theme is-rounded" aria-label="Email Nicolo">
+    <span class="icon"><i class="fas fa-envelope"></i></span>
+  </a>
+</div>
 
 <!-- ================= HERO ================= -->
 <section class="hero">
@@ -132,6 +167,16 @@
               <span class="icon"><i class="fas fa-book-open"></i></span>
               <span>Publications</span>
             </a>
+
+            <a href="#research" class="button is-theme is-rounded">
+              <span class="icon"><i class="fas fa-lightbulb"></i></span>
+              <span>Research</span>
+            </a>
+
+            <a href="#contact" class="button is-theme is-rounded">
+              <span class="icon"><i class="fas fa-paper-plane"></i></span>
+              <span>Contact</span>
+            </a>
           </div>
 
         </div>
@@ -159,7 +204,7 @@
 </section>
 
 <!-- ================= RESEARCH ================= -->
-<section class="section">
+<section class="section" id="research">
   <div class="container is-max-desktop">
     <h2 class="title is-3">Research Interests</h2>
     <ul>
@@ -230,7 +275,7 @@
       </div>
 
       <div class="column is-12-tablet is-6-desktop">
-        <a class="pub-card" href="https://scholar.google.com/scholar?q=The+Neurodevelopmental+Dynamics+of+Multilingual+Experience+During+Childhood:+A+Longitudinal+Behavioral,+Structural,+and+Functional+MRI+Study" target="_blank" rel="noopener">
+        <a class="pub-card" href="https://doi.org/10.3390/brainsci15010054" target="_blank" rel="noopener">
           <div class="pub-meta">Brain Sciences · 2025</div>
           <div class="pub-title">The Neurodevelopmental Dynamics of Multilingual Experience During Childhood: A Longitudinal Behavioral, Structural, and Functional MRI Study.</div>
           <div class="pub-meta">Della Rosa, P. A.; et al.</div>
@@ -238,7 +283,7 @@
       </div>
 
       <div class="column is-12-tablet is-6-desktop">
-        <a class="pub-card" href="https://scholar.google.com/scholar?q=Functional+connectivity+markers+of+prematurity+at+birth+predict+neurodevelopmental+outcomes" target="_blank" rel="noopener">
+        <a class="pub-card" href="https://doi.org/10.1177/01650254241312136" target="_blank" rel="noopener">
           <div class="pub-meta">International Journal of Behavioral Development · 2025</div>
           <div class="pub-title">Functional connectivity markers of prematurity at birth predict neurodevelopmental outcomes at 6, 12, 24, and 36 months.</div>
           <div class="pub-meta">Canini, M.; et al.</div>
@@ -246,7 +291,7 @@
       </div>
 
       <div class="column is-12-tablet is-6-desktop">
-        <a class="pub-card" href="https://scholar.google.com/scholar?q=The+maternal-fetal+neurodevelopmental+groundings+of+preterm+birth+risk" target="_blank" rel="noopener">
+        <a class="pub-card" href="https://doi.org/10.1016/j.heliyon.2024.e28825" target="_blank" rel="noopener">
           <div class="pub-meta">Heliyon · 2024</div>
           <div class="pub-title">The maternal-fetal neurodevelopmental groundings of preterm birth risk.</div>
           <div class="pub-meta">Miglioli, C.; et al.</div>
@@ -254,7 +299,7 @@
       </div>
 
       <div class="column is-12-tablet is-6-desktop">
-        <a class="pub-card" href="https://scholar.google.com/scholar?q=Maternal+anxiety-driven+modulation+of+fetal+limbic+connectivity" target="_blank" rel="noopener">
+        <a class="pub-card" href="https://doi.org/10.1002/jnr.25207" target="_blank" rel="noopener">
           <div class="pub-meta">Journal of Neuroscience Research · 2023</div>
           <div class="pub-title">Maternal anxiety-driven modulation of fetal limbic connectivity designs a backbone linking neonatal brain functional topology to socio-emotional development.</div>
           <div class="pub-meta">Canini, M.; Pecco, N.; et al.</div>
@@ -262,7 +307,7 @@
       </div>
 
       <div class="column is-12-tablet is-6-desktop">
-        <a class="pub-card" href="https://scholar.google.com/scholar?q=Complete+agenesis+of+corpus+callosum+and+unilateral+cortical+formation+anomalies+detected+on+fetal+MR" target="_blank" rel="noopener">
+        <a class="pub-card" href="https://doi.org/10.1007/s00330-022-09173-9" target="_blank" rel="noopener">
           <div class="pub-meta">European Radiology · 2023</div>
           <div class="pub-title">Complete agenesis of corpus callosum and unilateral cortical formation anomalies detected on fetal MR imaging.</div>
           <div class="pub-meta">Vola, E. A.; Pecco, N.; et al.</div>
@@ -270,7 +315,7 @@
       </div>
 
       <div class="column is-12-tablet is-6-desktop">
-        <a class="pub-card" href="https://scholar.google.com/scholar?q=RS-FetMRI:+a+MATLAB-SPM+based+tool+for+pre-processing+fetal+resting-state+fMRI+data" target="_blank" rel="noopener">
+        <a class="pub-card" href="https://doi.org/10.1007/s12021-022-09592-5" target="_blank" rel="noopener">
           <div class="pub-meta">Neuroinformatics · 2022</div>
           <div class="pub-title">RS-FetMRI: a MATLAB-SPM based tool for pre-processing fetal resting-state fMRI data.</div>
           <div class="pub-meta">Pecco, N.; et al.</div>
@@ -278,7 +323,7 @@
       </div>
 
       <div class="column is-12-tablet is-6-desktop">
-        <a class="pub-card" href="https://scholar.google.com/scholar?q=Optimizing+Performance+of+Transformer-based+Models+for+Fetal+Brain+MR+Image+Segmentation" target="_blank" rel="noopener">
+        <a class="pub-card" href="https://doi.org/10.1148/ryai.230229" target="_blank" rel="noopener">
           <div class="pub-meta">Radiology: Artificial Intelligence · 2024</div>
           <div class="pub-title">Optimizing Performance of Transformer-based Models for Fetal Brain MR Image Segmentation.</div>
           <div class="pub-meta">Pecco, N.; et al.</div>
@@ -305,7 +350,7 @@
 </section>
 
 <!-- ================= CONTACT ================= -->
-<section class="section">
+<section class="section" id="contact">
   <div class="container is-max-desktop">
     <h2 class="title is-3">Contact</h2>
     <p>
@@ -321,6 +366,29 @@
     </p>
   </div>
 </footer>
+
+<script>
+  // Theme toggle with localStorage memory
+  const toggleBtn = document.getElementById('themeToggle');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const saved = localStorage.getItem('np-theme');
+  const setMode = (mode) => {
+    if (mode === 'dark') {
+      document.body.classList.add('dark-mode');
+      toggleBtn.innerHTML = '<span class="icon"><i class="fas fa-sun"></i></span>';
+      localStorage.setItem('np-theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      toggleBtn.innerHTML = '<span class="icon"><i class="fas fa-moon"></i></span>';
+      localStorage.setItem('np-theme', 'light');
+    }
+  };
+  setMode(saved ? saved : (prefersDark ? 'dark' : 'light'));
+  toggleBtn.addEventListener('click', () => {
+    const next = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+    setMode(next);
+  });
+</script>
 
 </body>
 </html>
