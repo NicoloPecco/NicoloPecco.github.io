@@ -1,499 +1,458 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="description" content="Nicolo Pecco – AI for Medical Imaging, MRI, Gliomas and Fetal Neurodevelopment">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nicolo Pecco | AI Medical Imaging</title>
 
-  <!-- Typography & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZCgCq6StY5p1j4l+GY+h4uVJC3lz4KeqB8XWZikUTGd5n7D1pqlxMZQx13uQ8YIvw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
   <style>
     :root {
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --text: #1f2937;
-      --muted: #5f6b7a;
-      --accent: #1e7be7;
-      --accent-2: #0f5fc4;
-      --border: #e4e9f2;
-      --shadow-soft: 0 18px 50px rgba(15, 45, 85, 0.08);
-      --max-width: 1100px;
+      --theme-blue: #007bff;
+      --theme-blue-light: #e5f2ff;
+      --bg: #ffffff;
+      --text-color: #4a4a4a;
+      --card-border: #e3e8ef;
+      --card-shadow: rgba(0,0,0,0.06);
+      --muted: #6b7280;
+      --heading: #1f2937;
     }
-
-    * { box-sizing: border-box; }
 
     body {
-      margin: 0;
-      font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
-      background: radial-gradient(140% 80% at 10% 10%, rgba(30,123,231,0.08), transparent 35%),
-                  radial-gradient(120% 70% at 90% 0%, rgba(15,95,196,0.07), transparent 30%),
-                  var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      scroll-behavior: smooth;
+      font-family: 'Noto Sans', sans-serif;
+      color: var(--text-color);
+      background: var(--bg);
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
-    h1, h2, h3, h4 {
-      font-family: 'Manrope', 'Source Sans 3', sans-serif;
-      margin: 0;
-      color: var(--text);
-      letter-spacing: -0.01em;
+    body.dark-mode {
+      --bg: #0b1220;
+      --text-color: #e2e8f0;
+      --heading: #f5f7fb;
+      --theme-blue: #7fb4ff;
+      --theme-blue-light: #111b2f;
+      --card-border: #1f2937;
+      --card-shadow: rgba(0,0,0,0.5);
+      --muted: #94a3b8;
     }
 
-    p { margin: 0 0 0.9rem 0; color: var(--muted); }
-    a { color: var(--accent); text-decoration: none; transition: color 0.15s ease, opacity 0.15s ease; }
-    a:hover { color: var(--accent-2); }
-
-    /* Layout helpers */
-    .page { max-width: var(--max-width); margin: 0 auto; padding: 0 22px; }
-    section { padding: 80px 0; position: relative; }
-
-    /* Top navigation */
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(12px);
-      background: rgba(246,248,251,0.82);
-      border-bottom: 1px solid rgba(228,233,242,0.8);
-    }
-    .topbar-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 14px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
-    .brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(30,123,231,0.2); }
-
-    .nav-links { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
-    .nav-links a { font-weight: 600; color: var(--muted); padding: 8px 10px; border-radius: 8px; }
-    .nav-links a:hover { color: var(--text); background: rgba(30,123,231,0.08); }
-
-    .actions { display: flex; gap: 10px; align-items: center; }
-    .icon-btn {
-      width: 38px; height: 38px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      display: inline-flex; align-items: center; justify-content: center;
-      background: var(--card);
-      color: var(--text);
-      box-shadow: 0 8px 24px rgba(15,45,85,0.08);
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
-      cursor: pointer;
-    }
-    .icon-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(15,45,85,0.12); }
-    .icon-btn.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-    /* Hero */
-    .hero { padding: 110px 0 70px; }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 24px;
-      align-items: center;
-      text-align: center;
-    }
-    .avatar-wrap {
-      position: relative;
-      width: 220px;
-      height: 220px;
-      margin: 0 auto 14px;
-    }
-    .avatar-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -12px;
-      background: linear-gradient(135deg, rgba(30,123,231,0.35), rgba(15,95,196,0.15));
-      border-radius: 28px;
-      filter: blur(24px);
-      z-index: 0;
-    }
-    .avatar {
-      position: relative;
-      width: 100%; height: 100%;
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      background: var(--card);
-    }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .hero h1 { font-size: clamp(2.4rem, 4vw, 2.8rem); }
-    .hero .subtitle { font-size: 1.2rem; color: var(--muted); margin-top: 10px; }
-    .hero .meta { color: var(--muted); font-size: 0.98rem; }
-
-    .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 18px; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      font-weight: 700;
-      border: 1px solid transparent;
+    a {
+      color: var(--theme-blue);
       text-decoration: none;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
-      background: var(--card);
-      color: var(--text);
-      box-shadow: 0 14px 36px rgba(15,45,85,0.12);
-    }
-    .btn:hover { transform: translateY(-1px); box-shadow: 0 18px 40px rgba(15,45,85,0.14); }
-    .btn.accent { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; border-color: var(--accent); }
-    .btn.ghost { border-color: var(--border); color: var(--muted); }
-
-    /* Section headers */
-    .section-header { text-align: center; margin-bottom: 30px; }
-    .section-header p { max-width: 640px; margin: 10px auto 0; }
-
-    /* Content blocks */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 26px;
-      box-shadow: var(--shadow-soft);
-    }
-    .two-col {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
+      transition: color 0.2s ease;
     }
 
-    /* Highlight box for About */
-    .text-block { font-size: 1.02rem; }
-    .text-block p:last-child { margin-bottom: 0; }
+    a:hover {
+      text-decoration: underline;
+      color: #0056b3;
+    }
+    body.dark-mode a:hover { color: #bcd5ff; }
 
-    /* Research cards */
-    .pill-title { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
-    .pill-title .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(30,123,231,0.15); }
-    ul { padding-left: 18px; margin: 0; color: var(--muted); }
+    .title {
+      font-family: 'Google Sans', sans-serif;
+      color: var(--heading);
+    }
 
-    /* Collaboration callout */
-    .callout { text-align: center; }
-    .callout p { font-size: 1.05rem; }
+    .button.is-theme {
+      background-color: var(--theme-blue);
+      color: white;
+      border: none;
+    }
 
-    /* Publications */
-    .pub-year { margin: 32px 0 16px; font-size: 1.4rem; letter-spacing: -0.01em; }
-    .pub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-    .pub-card {
+    .button.is-theme:hover {
+      background-color: #0056b3;
+      color: white;
+    }
+
+    section.section {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .box-highlight {
+      background-color: #f9f9f9;
+      border-left: 5px solid var(--theme-blue);
+      padding: 25px;
+      border-radius: 8px;
+    }
+    body.dark-mode .box-highlight {
+      background-color: #111827;
+      border-color: var(--theme-blue);
+    }
+
+    /* Publication cards */
+    #publications .pub-card {
       display: block;
       height: 100%;
+      border-radius: 10px;
       padding: 18px 18px 14px 18px;
-      border-radius: 16px;
-      background: linear-gradient(150deg, rgba(30,123,231,0.04), rgba(15,95,196,0.02) 45%, #fff 90%);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
-      color: inherit;
+      background: linear-gradient(145deg, #ffffff 0%, #f4f7fb 100%);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 20px var(--card-shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .pub-card:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(15,45,85,0.14); border-color: rgba(30,123,231,0.35); }
-    .pub-meta { font-size: 0.95rem; color: var(--muted); margin-bottom: 6px; }
-    .pub-title { font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.45; }
-
-    /* Footer */
-    footer { padding: 50px 0 60px; text-align: center; color: var(--muted); font-size: 0.95rem; }
-
-    /* Responsive tweaks */
-    @media (min-width: 900px) {
-      .hero-grid { grid-template-columns: auto; }
+    #publications .pub-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
     }
-    @media (max-width: 640px) {
-      .topbar-inner { flex-wrap: wrap; gap: 12px; }
-      .nav-links { width: 100%; justify-content: center; }
-      .actions { width: 100%; justify-content: center; }
-      section { padding: 68px 0; }
+    #publications .pub-meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    #publications .pub-title {
+      font-weight: 700;
+      color: #1f2933;
+    }
+    body.dark-mode #publications .pub-card {
+      background: linear-gradient(145deg, #111827 0%, #0b1220 100%);
+    }
+    body.dark-mode #publications .pub-title {
+      color: #e5e7eb;
+    }
+    body.dark-mode #publications .pub-card:hover {
+      box-shadow: 0 12px 24px rgba(0,0,0,0.6);
+    }
+
+    /* Divider between sections */
+    .section-divider {
+      height: 1px;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 50%, transparent 100%);
+    }
+    body.dark-mode .section-divider {
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
     }
   </style>
 </head>
+
 <body>
-  <!-- ============== Top Navigation ============== -->
-  <!-- Sticky nav with anchors for quick jump to sections -->
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand"><span class="dot"></span>Nicolo Pecco</div>
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#research">Research</a>
-        <a href="#collab">Collaborazioni</a>
-        <a href="#publications">Publications</a>
-      </nav>
-      <div class="actions">
-        <a class="icon-btn" href="mailto:nicolo.pecco@hsr.it" aria-label="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-        <button id="themeToggle" class="icon-btn accent" aria-label="Toggle theme">
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <!-- ============== Hero / Intro ============== -->
-    <!-- Hero with portrait, name, role, and quick-access buttons -->
-    <section class="hero" id="top">
-      <div class="page">
-        <div class="hero-grid">
-          <div>
-            <div class="avatar-wrap">
-              <div class="avatar">
-                <img src="./assets/img/profile.png" alt="Nicolo Pecco portrait">
-              </div>
-            </div>
-            <h1>Nicolo Pecco</h1>
-            <p class="subtitle">AI for Medical Imaging · Computer Vision · Data Science</p>
-            <p class="meta">PhD in Neuroscience &amp; Experimental Neurology<br>Università Vita-Salute San Raffaele</p>
-            <div class="cta-row">
-              <a href="./assets/cv/NicoloPecco_CV.pdf" class="btn accent" target="_blank" rel="noopener">
-                <i class="fas fa-file-pdf"></i><span>CV</span>
-              </a>
-              <a href="https://github.com/NicoloPecco" class="btn" target="_blank" rel="noopener">
-                <i class="fab fa-github"></i><span>GitHub</span>
-              </a>
-              <a href="https://scholar.google.com/citations?user=PS1pl3cAAAAJ" class="btn" target="_blank" rel="noopener">
-                <i class="fas fa-graduation-cap"></i><span>Google Scholar</span>
-              </a>
-              <a href="https://www.linkedin.com/in/nicolo-pecco/" class="btn" target="_blank" rel="noopener">
-                <i class="fab fa-linkedin"></i><span>LinkedIn</span>
-              </a>
-              <a href="#publications" class="btn ghost">
-                <i class="fas fa-book-open"></i><span>Publications</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- ================= TOP BAR ================= -->
+<div style="position:fixed; top:14px; right:14px; z-index:20;" class="buttons">
+  <button id="themeToggle" class="button is-theme is-rounded" aria-label="Toggle dark mode">
+    <span class="icon"><i class="fas fa-moon"></i></span>
+  </button>
+  <a href="mailto:nicolo.pecco@hsr.it" class="button is-theme is-rounded" aria-label="Email Nicolo">
+    <span class="icon"><i class="fas fa-envelope"></i></span>
+  </a>
+</div>
 
-    <!-- ============== About ============== -->
-    <!-- Single-column block with generous whitespace for biography -->
-    <section id="about">
-      <div class="page">
-        <div class="section-header">
-          <h2>About</h2>
-        </div>
-        <div class="card text-block">
-          <p>
-            I am a biomedical engineer, born in Sardinia and academically trained in Turin, with a strong interdisciplinary background at the intersection of engineering, neuroscience, and medical imaging.
-            I am currently working at IRCCS Ospedale San Raffaele in Milan, where I collaborate with neuroradiology, gynecology, and cardiology units.
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <figure class="image is-256x256" style="margin:0 auto 15px auto;">
+            <img src="./assets/img/profile.png" alt="Nicolo Pecco portrait" style="display:block; margin:auto; border-radius: 50%; box-shadow: 0 6px 14px rgba(0,0,0,0.12); object-fit: cover; width:256px; height:256px;">
+          </figure>
+          <h1 class="title is-1">Nicolo Pecco</h1>
+          <p class="is-size-4" style="margin-top:10px;">
+            AI for Medical Imaging · Computer Vision · Data Science
           </p>
 
-          <p>
-            My research focuses on artificial intelligence for medical imaging, spanning brain MRI, fetal imaging, and cardiovascular applications.
-            Alongside my work at San Raffaele, I collaborate with international research centers, including the Artificial Intelligence Lab at Mayo Clinic, as well as other academic and clinical institutions worldwide.
+          <p class="is-size-6" style="margin-top:15px;">
+            PhD in Neuroscience & Experimental Neurology<br>
+            Università Vita-Salute San Raffaele
           </p>
 
-          <p>
-            For a detailed overview of my academic and professional background, please refer to the attached CV.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== Research Interests ============== -->
-    <!-- Two responsive cards outlining focus areas -->
-    <section id="research">
-      <div class="page">
-        <div class="section-header">
-          <h2>Research Interests</h2>
-        </div>
-        <div class="two-col">
-          <div class="card">
-            <div class="pill-title"><span class="dot"></span><h3>Brain Tumors</h3></div>
-            <ul>
-              <li>Glioma segmentation and molecular characterization</li>
-              <li>Radiomics and advanced diffusion/perfusion MRI</li>
-              <li>AI models for grading and subtype prediction</li>
-              <li>Model interpretability and uncertainty</li>
-            </ul>
-          </div>
-          <div class="card">
-            <div class="pill-title"><span class="dot"></span><h3>Neurodevelopment</h3></div>
-            <ul>
-              <li>Fetal and neonatal brain connectivity (fMRI / MRI)</li>
-              <li>Impact of prenatal environment on early language and cognition</li>
-              <li>Longitudinal functional connectivity biomarkers</li>
-              <li>Deep learning for fetal/neonatal image analysis</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== Collaboration ============== -->
-    <!-- Centered call-to-action block for contact -->
-    <section id="collab">
-      <div class="page">
-        <div class="section-header">
-          <h2>Collaborazioni &amp; Supporto</h2>
-        </div>
-        <div class="card callout">
-          <p>Feel free to contact me for collaboration or support with analyzing your data.</p>
-          <p style="margin-top: 8px;">
-            <a href="mailto:nicolo.pecco@hsr.it" class="btn accent">
-              <i class="fas fa-envelope"></i><span>nicolo.pecco@hsr.it</span>
+          <!-- LINKS -->
+          <div class="buttons is-centered" style="margin-top:20px; flex-wrap:wrap; gap:10px;">
+            <a href="./assets/cv/NicoloPecco_CV.pdf" class="button is-theme is-rounded" target="_blank">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span>CV</span>
             </a>
-          </p>
+
+            <a href="https://github.com/NicoloPecco" class="button is-theme is-rounded" target="_blank">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>GitHub</span>
+            </a>
+
+            <!-- Replace the Scholar URL with your profile link when available -->
+            <a href="https://scholar.google.com/citations?user=PS1pl3cAAAAJ" class="button is-theme is-rounded" target="_blank">
+              <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+              <span>Google Scholar</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/nicolo-pecco/" class="button is-theme is-rounded" target="_blank">
+              <span class="icon"><i class="fab fa-linkedin"></i></span>
+              <span>LinkedIn</span>
+            </a>
+
+            <a href="#publications" class="button is-theme is-rounded">
+              <span class="icon"><i class="fas fa-book-open"></i></span>
+              <span>Publications</span>
+            </a>
+          </div>
+
         </div>
       </div>
-    </section>
-
-    <!-- ============== Publications ============== -->
-    <!-- Timeline-style grid of publication cards grouped by year -->
-    <section id="publications">
-      <div class="page">
-        <div class="section-header">
-          <h2>Publications</h2>
-          <p>Selezione di lavori recenti; clicca le card per andare all'articolo.</p>
-        </div>
-        <div class="actions" style="justify-content: center; margin-bottom: 10px;">
-          <a href="https://scholar.google.com/citations?user=PS1pl3cAAAAJ" class="btn ghost" target="_blank" rel="noopener">
-            <i class="fas fa-external-link-alt"></i><span>Tutte su Scholar</span>
-          </a>
-        </div>
-
-        <h3 class="pub-year">2025</h3>
-        <div class="pub-grid">
-          <a class="pub-card" href="https://doi.org/10.1038/s41598-025-17531-y" target="_blank" rel="noopener">
-            <div class="pub-meta">Scientific Reports</div>
-            <div class="pub-title">Prenatal brain connectivity and postnatal language: how familial risk and prenatal speech exposure shape early language skills.</div>
-            <div class="pub-meta">Cara, C.; Canini, M.; Oprandi, C.; Pecco, N.; Cavoretto, P. I.; Candiani, M.; Rosa, P. A. D. et al.</div>
-          </a>
-          <a class="pub-card" href="https://doi.org/10.1186/s41747-025-00652-4" target="_blank" rel="noopener">
-            <div class="pub-meta">European Radiology Experimental</div>
-            <div class="pub-title">Non-invasive identification of mesenchymal glioblastoma using quantitative radiomic features from advanced diffusion MRI: a preclinical-to-clinical transfer learning strategy.</div>
-            <div class="pub-meta">Gallotti, A. L.; Pecco, N.; Pieri, V.; Cominelli, M.; Brugnara, G.; Altabella, L.; Galli, R. et al.</div>
-          </a>
-          <a class="pub-card" href="https://doi.org/10.1088/1741-2552/adfbc2" target="_blank" rel="noopener">
-            <div class="pub-meta">Journal of Neural Engineering</div>
-            <div class="pub-title">Optimized AI-based neural decoding from BOLD fMRI signal for analyzing visual and semantic ROIs in the human visual system.</div>
-            <div class="pub-meta">Veronese, L.; Moglia, A.; Pecco, N.; Della Rosa, P. A.; Scifo, P.; Mainardi, L.; Cerveri, P.</div>
-          </a>
-          <a class="pub-card" href="https://doi.org/10.1002/jmri.70154" target="_blank" rel="noopener">
-            <div class="pub-meta">Journal of Magnetic Resonance Imaging</div>
-            <div class="pub-title">Editorial for “Evaluating Measurement Stability in Glioblastomas Using Magnetic Resonance Elastography: Repeatability and Interobserver Agreement”.</div>
-            <div class="pub-meta">Nocera, G.; Pecco, N.</div>
-          </a>
-          <a class="pub-card" href="https://doi.org/10.1002/jmri.70145" target="_blank" rel="noopener">
-            <div class="pub-meta">Journal of Magnetic Resonance Imaging</div>
-            <div class="pub-title">Evaluating Measurement Stability in Glioblastomas Using Magnetic Resonance Elastography: Repeatability and Interobserver Agreement.</div>
-            <div class="pub-meta">Della Rosa, P. A.; et al.</div>
-          </a>
-          <a class="pub-card" href="https://doi.org/10.3390/brainsci15010054" target="_blank" rel="noopener">
-            <div class="pub-meta">Brain Sciences</div>
-            <div class="pub-title">The Neurodevelopmental Dynamics of Multilingual Experience During Childhood: A Longitudinal Behavioral, Structural, and Functional MRI Study.</div>
-            <div class="pub-meta">Della Rosa, P. A.; et al.</div>
-          </a>
-          <a class="pub-card" href="https://doi.org/10.1177/01650254241312136" target="_blank" rel="noopener">
-            <div class="pub-meta">International Journal of Behavioral Development</div>
-            <div class="pub-title">Functional connectivity markers of prematurity at birth predict neurodevelopmental outcomes at 6, 12, 24, and 36 months.</div>
-            <div class="pub-meta">Canini, M.; et al.</div>
-          </a>
-        </div>
-
-        <h3 class="pub-year">2024</h3>
-        <div class="pub-grid">
-          <a class="pub-card" href="https://doi.org/10.1016/j.heliyon.2024.e28825" target="_blank" rel="noopener">
-            <div class="pub-meta">Heliyon</div>
-            <div class="pub-title">The maternal-fetal neurodevelopmental groundings of preterm birth risk.</div>
-            <div class="pub-meta">Miglioli, C.; et al.</div>
-          </a>
-          <a class="pub-card" href="https://doi.org/10.1148/ryai.230229" target="_blank" rel="noopener">
-            <div class="pub-meta">Radiology: Artificial Intelligence</div>
-            <div class="pub-title">Optimizing Performance of Transformer-based Models for Fetal Brain MR Image Segmentation.</div>
-            <div class="pub-meta">Pecco, N.; et al.</div>
-          </a>
-        </div>
-
-        <h3 class="pub-year">2023</h3>
-        <div class="pub-grid">
-          <a class="pub-card" href="https://doi.org/10.1002/jnr.25207" target="_blank" rel="noopener">
-            <div class="pub-meta">Journal of Neuroscience Research</div>
-            <div class="pub-title">Maternal anxiety-driven modulation of fetal limbic connectivity designs a backbone linking neonatal brain functional topology to socio-emotional development.</div>
-            <div class="pub-meta">Canini, M.; Pecco, N.; et al.</div>
-          </a>
-          <a class="pub-card" href="https://doi.org/10.1007/s00330-022-09173-9" target="_blank" rel="noopener">
-            <div class="pub-meta">European Radiology</div>
-            <div class="pub-title">Complete agenesis of corpus callosum and unilateral cortical formation anomalies detected on fetal MR imaging.</div>
-            <div class="pub-meta">Vola, E. A.; Pecco, N.; et al.</div>
-          </a>
-        </div>
-
-        <h3 class="pub-year">2022</h3>
-        <div class="pub-grid">
-          <a class="pub-card" href="https://doi.org/10.1007/s12021-022-09592-5" target="_blank" rel="noopener">
-            <div class="pub-meta">Neuroinformatics</div>
-            <div class="pub-title">RS-FetMRI: a MATLAB-SPM based tool for pre-processing fetal resting-state fMRI data.</div>
-            <div class="pub-meta">Pecco, N.; et al.</div>
-          </a>
-          <a class="pub-card" href="https://doi.org/10.3389/fnins.2022.885291" target="_blank" rel="noopener">
-            <div class="pub-meta">Frontiers in Neuroscience</div>
-            <div class="pub-title">Decoding the heterogeneity of malignant gliomas by PET and MRI for spatial habitat analysis of hypoxia, perfusion, and diffusion imaging: a preliminary study.</div>
-            <div class="pub-meta">Bailo, M.; Pecco, N.; et al.</div>
-          </a>
-        </div>
-
-        <h3 class="pub-year">2021</h3>
-        <div class="pub-grid">
-          <a class="pub-card" href="https://doi.org/10.3390/cancers13164196" target="_blank" rel="noopener">
-            <div class="pub-meta">Cancers</div>
-            <div class="pub-title">Raman spectroscopy and machine learning for IDH genotyping of unprocessed glioma biopsies.</div>
-            <div class="pub-meta">Sciortino, T.; Pecco, N.; et al.</div>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============== Footer ============== -->
-  <footer>
-    <div class="page">
-      <p>© 2026 Nicolo Pecco · Built with GitHub Pages</p>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    // Theme toggle with localStorage
-    const toggleBtn = document.getElementById('themeToggle');
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('np-theme');
+<!-- ================= ABOUT ================= -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">About</h2>
+    <div class="box-highlight content">
+      <p>
+        I am a biomedical engineer, born in Sardinia and academically trained in Turin, with a strong interdisciplinary background at the intersection of engineering, neuroscience, and medical imaging.
+        I am currently working at IRCCS Ospedale San Raffaele in Milan, where I collaborate with neuroradiology, gynecology, and cardiology units.
+      </p>
 
-    const applyTheme = (mode) => {
-      const root = document.documentElement;
-      if (mode === 'dark') {
-        root.style.setProperty('--bg', '#0c1524');
-        root.style.setProperty('--card', '#111b2f');
-        root.style.setProperty('--text', '#e8edf5');
-        root.style.setProperty('--muted', '#aab6c9');
-        root.style.setProperty('--border', '#1f2b44');
-        root.style.setProperty('--shadow-soft', '0 18px 50px rgba(3, 9, 20, 0.45)');
-        toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-      } else {
-        root.style.setProperty('--bg', '#f6f8fb');
-        root.style.setProperty('--card', '#ffffff');
-        root.style.setProperty('--text', '#1f2937');
-        root.style.setProperty('--muted', '#5f6b7a');
-        root.style.setProperty('--border', '#e4e9f2');
-        root.style.setProperty('--shadow-soft', '0 18px 50px rgba(15, 45, 85, 0.08)');
-        toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-      }
-      localStorage.setItem('np-theme', mode);
-    };
+      <p>
+        My research focuses on artificial intelligence for medical imaging, spanning brain MRI, fetal imaging, and cardiovascular applications.
+        Alongside my work at San Raffaele, I collaborate with international research centers, including the Artificial Intelligence Lab at Mayo Clinic, as well as other academic and clinical institutions worldwide.
+      </p>
 
-    applyTheme(savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light'));
+      <p>
+        For a detailed overview of my academic and professional background, please refer to the attached CV.
+      </p>
+    </div>
+  </div>
+</section>
 
-    toggleBtn.addEventListener('click', () => {
-      const current = localStorage.getItem('np-theme') || (prefersDark ? 'dark' : 'light');
-      applyTheme(current === 'dark' ? 'light' : 'dark');
-    });
-  </script>
+<div class="section-divider"></div>
+
+<!-- ================= RESEARCH ================= -->
+<section class="section" id="research">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Research Interests</h2>
+    <div class="columns is-variable is-6">
+      <div class="column">
+        <div class="box-highlight content">
+          <h3 class="title is-5">Brain Tumors</h3>
+          <ul>
+            <li>Glioma segmentation and molecular characterization</li>
+            <li>Radiomics and advanced diffusion/perfusion MRI</li>
+            <li>AI models for grading and subtype prediction</li>
+            <li>Model interpretability and uncertainty</li>
+          </ul>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box-highlight content">
+          <h3 class="title is-5">Neurodevelopment</h3>
+          <ul>
+            <li>Fetal and neonatal brain connectivity (fMRI / MRI)</li>
+            <li>Impact of prenatal environment on early language and cognition</li>
+            <li>Longitudinal functional connectivity biomarkers</li>
+            <li>Deep learning for fetal/neonatal image analysis</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ================= COLLAB ================= -->
+<section class="section" id="collab">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Collaborazioni & Supporto</h2>
+    <div class="box-highlight content has-text-centered">
+      <p style="font-size:1.05rem; margin-bottom:0.5rem;">
+        Feel free to contact me for collaboration or support with analyzing your data.
+      </p>
+      <p>
+        <a href="mailto:nicolo.pecco@hsr.it" class="button is-theme is-rounded">
+          <span class="icon"><i class="fas fa-envelope"></i></span>
+          <span>nicolo.pecco@hsr.it</span>
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ================= PUBLICATIONS ================= -->
+<section class="section" id="publications">
+  <div class="container is-max-desktop">
+    <div class="columns is-vcentered">
+      <div class="column">
+        <h2 class="title is-3">Publications</h2>
+        <p class="subtitle is-6">Selezione di lavori recenti; clicca le card per andare all'articolo.</p>
+      </div>
+      <div class="column has-text-right">
+        <a href="https://scholar.google.com/citations?user=PS1pl3cAAAAJ" class="button is-light is-rounded" target="_blank">
+          <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+          <span>Tutte su Scholar</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2025 -->
+    <h3 class="title is-4" style="margin-top:1rem;">2025</h3>
+    <div class="columns is-multiline">
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1038/s41598-025-17531-y" target="_blank" rel="noopener">
+          <div class="pub-meta">Scientific Reports</div>
+          <div class="pub-title">Prenatal brain connectivity and postnatal language: how familial risk and prenatal speech exposure shape early language skills.</div>
+          <div class="pub-meta">Cara, C.; Canini, M.; Oprandi, C.; Pecco, N.; Cavoretto, P. I.; Candiani, M.; Rosa, P. A. D. et al.</div>
+        </a>
+      </div>
+
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1186/s41747-025-00652-4" target="_blank" rel="noopener">
+          <div class="pub-meta">European Radiology Experimental</div>
+          <div class="pub-title">Non-invasive identification of mesenchymal glioblastoma using quantitative radiomic features from advanced diffusion MRI: a preclinical-to-clinical transfer learning strategy.</div>
+          <div class="pub-meta">Gallotti, A. L.; Pecco, N.; Pieri, V.; Cominelli, M.; Brugnara, G.; Altabella, L.; Galli, R. et al.</div>
+        </a>
+      </div>
+
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1088/1741-2552/adfbc2" target="_blank" rel="noopener">
+          <div class="pub-meta">Journal of Neural Engineering</div>
+          <div class="pub-title">Optimized AI-based neural decoding from BOLD fMRI signal for analyzing visual and semantic ROIs in the human visual system.</div>
+          <div class="pub-meta">Veronese, L.; Moglia, A.; Pecco, N.; Della Rosa, P. A.; Scifo, P.; Mainardi, L.; Cerveri, P.</div>
+        </a>
+      </div>
+
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1002/jmri.70154" target="_blank" rel="noopener">
+          <div class="pub-meta">Journal of Magnetic Resonance Imaging</div>
+          <div class="pub-title">Editorial for “Evaluating Measurement Stability in Glioblastomas Using Magnetic Resonance Elastography: Repeatability and Interobserver Agreement”.</div>
+          <div class="pub-meta">Nocera, G.; Pecco, N.</div>
+        </a>
+      </div>
+
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1002/jmri.70145" target="_blank" rel="noopener">
+          <div class="pub-meta">Journal of Magnetic Resonance Imaging</div>
+          <div class="pub-title">Evaluating Measurement Stability in Glioblastomas Using Magnetic Resonance Elastography: Repeatability and Interobserver Agreement.</div>
+          <div class="pub-meta">Della Rosa, P. A.; et al.</div>
+        </a>
+      </div>
+
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.3390/brainsci15010054" target="_blank" rel="noopener">
+          <div class="pub-meta">Brain Sciences</div>
+          <div class="pub-title">The Neurodevelopmental Dynamics of Multilingual Experience During Childhood: A Longitudinal Behavioral, Structural, and Functional MRI Study.</div>
+          <div class="pub-meta">Della Rosa, P. A.; et al.</div>
+        </a>
+      </div>
+
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1177/01650254241312136" target="_blank" rel="noopener">
+          <div class="pub-meta">International Journal of Behavioral Development</div>
+          <div class="pub-title">Functional connectivity markers of prematurity at birth predict neurodevelopmental outcomes at 6, 12, 24, and 36 months.</div>
+          <div class="pub-meta">Canini, M.; et al.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2024 -->
+    <h3 class="title is-4" style="margin-top:1rem;">2024</h3>
+    <div class="columns is-multiline">
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1016/j.heliyon.2024.e28825" target="_blank" rel="noopener">
+          <div class="pub-meta">Heliyon</div>
+          <div class="pub-title">The maternal-fetal neurodevelopmental groundings of preterm birth risk.</div>
+          <div class="pub-meta">Miglioli, C.; et al.</div>
+        </a>
+      </div>
+
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1148/ryai.230229" target="_blank" rel="noopener">
+          <div class="pub-meta">Radiology: Artificial Intelligence</div>
+          <div class="pub-title">Optimizing Performance of Transformer-based Models for Fetal Brain MR Image Segmentation.</div>
+          <div class="pub-meta">Pecco, N.; et al.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2023 -->
+    <h3 class="title is-4" style="margin-top:1rem;">2023</h3>
+    <div class="columns is-multiline">
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1002/jnr.25207" target="_blank" rel="noopener">
+          <div class="pub-meta">Journal of Neuroscience Research</div>
+          <div class="pub-title">Maternal anxiety-driven modulation of fetal limbic connectivity designs a backbone linking neonatal brain functional topology to socio-emotional development.</div>
+          <div class="pub-meta">Canini, M.; Pecco, N.; et al.</div>
+        </a>
+      </div>
+
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1007/s00330-022-09173-9" target="_blank" rel="noopener">
+          <div class="pub-meta">European Radiology</div>
+          <div class="pub-title">Complete agenesis of corpus callosum and unilateral cortical formation anomalies detected on fetal MR imaging.</div>
+          <div class="pub-meta">Vola, E. A.; Pecco, N.; et al.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2022 -->
+    <h3 class="title is-4" style="margin-top:1rem;">2022</h3>
+    <div class="columns is-multiline">
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.1007/s12021-022-09592-5" target="_blank" rel="noopener">
+          <div class="pub-meta">Neuroinformatics</div>
+          <div class="pub-title">RS-FetMRI: a MATLAB-SPM based tool for pre-processing fetal resting-state fMRI data.</div>
+          <div class="pub-meta">Pecco, N.; et al.</div>
+        </a>
+      </div>
+
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.3389/fnins.2022.885291" target="_blank" rel="noopener">
+          <div class="pub-meta">Frontiers in Neuroscience</div>
+          <div class="pub-title">Decoding the heterogeneity of malignant gliomas by PET and MRI for spatial habitat analysis of hypoxia, perfusion, and diffusion imaging: a preliminary study.</div>
+          <div class="pub-meta">Bailo, M.; Pecco, N.; et al.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2021 -->
+    <h3 class="title is-4" style="margin-top:1rem;">2021</h3>
+    <div class="columns is-multiline">
+      <div class="column is-12-tablet is-6-desktop">
+        <a class="pub-card" href="https://doi.org/10.3390/cancers13164196" target="_blank" rel="noopener">
+          <div class="pub-meta">Cancers</div>
+          <div class="pub-title">Raman spectroscopy and machine learning for IDH genotyping of unprocessed glioma biopsies.</div>
+          <div class="pub-meta">Sciortino, T.; Pecco, N.; et al.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      © 2026 Nicolo Pecco · Built with GitHub Pages
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle with localStorage memory
+  const toggleBtn = document.getElementById('themeToggle');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const saved = localStorage.getItem('np-theme');
+  const setMode = (mode) => {
+    if (mode === 'dark') {
+      document.body.classList.add('dark-mode');
+      toggleBtn.innerHTML = '<span class="icon"><i class="fas fa-sun"></i></span>';
+      localStorage.setItem('np-theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      toggleBtn.innerHTML = '<span class="icon"><i class="fas fa-moon"></i></span>';
+      localStorage.setItem('np-theme', 'light');
+    }
+  };
+  setMode(saved ? saved : (prefersDark ? 'dark' : 'light'));
+  toggleBtn.addEventListener('click', () => {
+    const next = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+    setMode(next);
+  });
+</script>
+
 </body>
 </html>
