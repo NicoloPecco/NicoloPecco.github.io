@@ -19,6 +19,7 @@
       --card-border: #e3e8ef;
       --card-shadow: rgba(0,0,0,0.06);
       --muted: #6b7280;
+      --heading: #1f2937;
     }
 
     body {
@@ -29,26 +30,31 @@
     }
 
     body.dark-mode {
-      --bg: #0f172a;
+      --bg: #0b1220;
       --text-color: #e2e8f0;
-      --theme-blue: #6ba6ff;
-      --theme-blue-light: #1e293b;
+      --heading: #f5f7fb;
+      --theme-blue: #7fb4ff;
+      --theme-blue-light: #111b2f;
       --card-border: #1f2937;
-      --card-shadow: rgba(0,0,0,0.4);
+      --card-shadow: rgba(0,0,0,0.5);
       --muted: #94a3b8;
     }
 
     a {
       color: var(--theme-blue);
       text-decoration: none;
+      transition: color 0.2s ease;
     }
 
     a:hover {
       text-decoration: underline;
+      color: #0056b3;
     }
+    body.dark-mode a:hover { color: #bcd5ff; }
 
     .title {
       font-family: 'Google Sans', sans-serif;
+      color: var(--heading);
     }
 
     .button.is-theme {
@@ -75,6 +81,7 @@
     }
     body.dark-mode .box-highlight {
       background-color: #111827;
+      border-color: var(--theme-blue);
     }
 
     /* Publication cards */
@@ -105,6 +112,9 @@
     }
     body.dark-mode #publications .pub-title {
       color: #e5e7eb;
+    }
+    body.dark-mode #publications .pub-card:hover {
+      box-shadow: 0 12px 24px rgba(0,0,0,0.6);
     }
   </style>
 </head>
@@ -166,16 +176,6 @@
             <a href="#publications" class="button is-theme is-rounded">
               <span class="icon"><i class="fas fa-book-open"></i></span>
               <span>Publications</span>
-            </a>
-
-            <a href="#research" class="button is-theme is-rounded">
-              <span class="icon"><i class="fas fa-lightbulb"></i></span>
-              <span>Research</span>
-            </a>
-
-            <a href="#contact" class="button is-theme is-rounded">
-              <span class="icon"><i class="fas fa-paper-plane"></i></span>
-              <span>Contact</span>
             </a>
           </div>
 
