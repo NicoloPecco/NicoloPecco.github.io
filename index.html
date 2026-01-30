@@ -116,6 +116,17 @@
     body.dark-mode #publications .pub-card:hover {
       box-shadow: 0 12px 24px rgba(0,0,0,0.6);
     }
+
+    /* Divider between sections */
+    .section-divider {
+      height: 1px;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 50%, transparent 100%);
+    }
+    body.dark-mode .section-divider {
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+    }
   </style>
 </head>
 
@@ -203,6 +214,8 @@
   </div>
 </section>
 
+<div class="section-divider"></div>
+
 <!-- ================= RESEARCH ================= -->
 <section class="section" id="research">
   <div class="container is-max-desktop">
@@ -233,6 +246,28 @@
     </div>
   </div>
 </section>
+
+<div class="section-divider"></div>
+
+<!-- ================= COLLAB ================= -->
+<section class="section" id="collab">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Collaborazioni & Supporto</h2>
+    <div class="box-highlight content has-text-centered">
+      <p style="font-size:1.05rem; margin-bottom:0.5rem;">
+        Per collaborazioni, analisi dati o supporto tesi contattatemi.
+      </p>
+      <p>
+        <a href="mailto:nicolo.pecco@hsr.it" class="button is-theme is-rounded">
+          <span class="icon"><i class="fas fa-envelope"></i></span>
+          <span>nicolo.pecco@hsr.it</span>
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
 
 <!-- ================= PUBLICATIONS ================= -->
 <section class="section" id="publications">
@@ -383,6 +418,8 @@
     </div>
   </div>
 </section>
+
+<div class="section-divider"></div>
 
 <!-- ================= CONTACT ================= -->
 <section class="section" id="contact">
